@@ -112,6 +112,7 @@ def test_database():
 def main():
     initalize_tables()
     test_database()
+    connection.close()
 
 main()
 
