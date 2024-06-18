@@ -5,6 +5,10 @@ Testing GUI - https://pypi.org/project/Gooey/
 
 Development GUI - https://flet.dev/docs/
 
+# Project Architecture & Design
+
+![Project MVP Architecture](.images/project-design-mvp.png)
+
 ## Application Pages
 1) Project(s) Display
   - Header
