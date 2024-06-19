@@ -49,39 +49,24 @@ class table_schemas:
     );
     """
 
-def initalize_tables():
-    # If the table does not exist, create it
-    cur = connection.cursor()
-    if cur.execute(table_schemas.roadmaps):
-        print("Roadmaps table created")
-
-    if cur.execute(table_schemas.releases):
-        print("Releases table created")
-
-    if cur.execute(table_schemas.versions):
-        print("Versions table created")
-
-    if cur.execute(table_schemas.features):
-        print("Features table created")
-
-    cur.close()
-    connection.commit()
-    
-
-
-# Test the Database by Inserting Test Data
-def test_database():
-    
-    cur = connection.cursor()
-    
+class test_queries:
     # Insert test data into the tables
-    cur.execute("INSERT INTO roadmaps VALUES ('Project A', 'Project A Description', 'In Progress', '1', '1', '1')")
-    cur.execute("INSERT INTO releases VALUES (1, 1.0, 'John Doe', 'Jane Doe', 'John Smith', '2022-01-01', '2022-01-31', 'In Progress')")
-    cur.execute("INSERT INTO versions VALUES (1, 1.0, '2022-01-01', '2022-01-31', 'In Progress')")
-    cur.execute("INSERT INTO features VALUES (1, 'Feature 1', 'Feature 1 Description', 'In Progress')")
+    insert_project = """
+    INSERT INTO roadmaps VALUES ('Project A', 'Project A Description', 'In Progress', '1', '1', '1')
+    """
+    insert_release = """
+    INSERT INTO releases VALUES (1, 1.0, 'John Doe', 'Jane Doe', 'John Smith', '2022-01-01', '2022-01-31', 'In Progress')
+    """
+    insert_version = """
+    INSERT INTO versions VALUES (1, 1.0, '2022-01-01', '2022-01-31', 'In Progress')
+    """
+
+    insert_feature = """
+    INSERT INTO features VALUES (1, 'Feature 1', 'Feature 1 Description', 'In Progress')
+    """
 
     # Query the database to test the data
-    test_query = """
+    select_query = """
     SELECT * FROM 
     roadmaps , 
     R.release_number, 
@@ -104,16 +89,47 @@ def test_database():
     ORDER BY versions.version_number DESC;
     """
 
-    cur.execute(test_query)
+def initalize_tables():
+    # If the table does not exist, create it
+    cur = connection.cursor()
+    if cur.execute(table_schemas.roadmaps):
+        print("Roadmaps table created")
+
+    if cur.execute(table_schemas.releases):
+        print("Releases table created")
+
+    if cur.execute(table_schemas.versions):
+        print("Versions table created")
+
+    if cur.execute(table_schemas.features):
+        print("Features table created")
+
+    cur.close()
+    connection.commit()
+    
+# Test the Database by Inserting Test Data
+def test_database():
+    
+    cur = connection.cursor()
+    
+    # Insert test data into the tables
+    cur.execute(test_queries.insert_project)
+    cur.execute(test_queries.insert_release)
+    cur.execute(test_queries.insert_version)
+    cur.execute(test_queries.insert_feature)
+    cur.execute(test_queries.select_query)
+
     test_results = cur.fetchall()
     print(test_results)
     cur.close()
 
+# MAIN FUNCTION
 def main():
     initalize_tables()
     test_database()
     connection.close()
 
+# EXECUTE
 main()
 
 
