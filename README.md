@@ -9,6 +9,11 @@ Development GUI - https://flet.dev/docs/
 
 ![Project MVP Architecture](.images/project-design-mvp.png)
 
+## Development Dependencies
+
+1) Python 3.12.0 - `https://www.python.org/downloads/`
+2) Flet GUI Library - `pip install flet`
+
 ## Application Pages
 1) Project(s) Display
   - Header
